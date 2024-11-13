@@ -4,7 +4,7 @@ namespace App\Http\Requests\PasswordReset;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class sendEmailLinkRequest extends FormRequest
+class ResetPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,8 @@ class sendEmailLinkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required','email'],
+            'password' => ['required', 'string', 'min:6' ,'confirmed'],
+            'token' => ['required','string','exists:password_reset_tokens,token'],
             'isAdmin' => ['required','boolean']
         ];
     }

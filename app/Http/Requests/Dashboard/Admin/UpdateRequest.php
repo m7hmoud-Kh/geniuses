@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\PasswordReset;
+namespace App\Http\Requests\Dashboard\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class sendEmailLinkRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,7 @@ class sendEmailLinkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required','email'],
-            'isAdmin' => ['required','boolean']
+            'name' => ['between:2,100'],
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PasswordReset\ResetPasswordRequest;
 use App\Http\Requests\PasswordReset\sendEmailLinkRequest;
 use App\Mail\ResetPasswordMail;
 use App\Models\Admin;
@@ -14,38 +15,15 @@ use Illuminate\Support\Str;
 
 class PasswordResetController extends Controller
 {
-    //
     public function sendEmailLink(sendEmailLinkRequest $request)
     {
-        $emailFound = User::whereEmail($request->email)->first();
-        if($emailFound){
-            //get old token if found
-            $oldToken = PasswordReset::whereEmail($request->email)->first();
-            if($oldToken){
-                $token = $oldToken->token;
-            }else{
-                $token = Str::random(40);
-                PasswordReset::create([
-                    'email' => $request->email,
-                    'token' => $token,
-                ]);
-            }
-            //send Mail
-            Mail::to($request->email)->send(new ResetPasswordMail([
-                'email' => $request->email,
-                'token' => $token,
-            ]));
-            return response()->json([
-                'message' => 'Mail was sent, please Check Your Inbox'
-            ]);
-        }
-
+        $message = $this->checkIfUserOrAdminAndSendEmail($request);
         return response()->json([
-            'message' => "Email Not Found"
-        ],Response::HTTP_NOT_FOUND);
+            'message' => $message
+        ]);
     }
 
-    public function resetPassword(resetPasswordRequest $request)
+    public function resetPassword(ResetPasswordRequest $request)
     {
         $passwordReset = PasswordReset::where('token',$request->token)->first();
         if($passwordReset){
@@ -98,7 +76,7 @@ class PasswordResetController extends Controller
 
         if($emailFound){
                 $emailFound->update([
-                    'password' => $request->password,
+                    'password' => $request->password
                 ]);
                 //delete row reset Password
                 $passwordReset->delete();
