@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\ModuleController;
 use App\Http\Controllers\PasswordResetController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +22,5 @@ Route::post('/reset-password',[PasswordResetController::class,'resetPassword']);
 
 Route::middleware('auth:admin')->group(function(){
     Route::apiResource('categories',CategoryController::class);
+    Route::apiResource('modules',ModuleController::class);
 });

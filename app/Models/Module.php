@@ -3,22 +3,27 @@
 namespace App\Models;
 
 use App\Services\Utils\Getterable;
-use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Module extends Model
 {
     use HasFactory, Getterable;
 
-    public const DIR = '/assets/Categories';
-    public const DISK_NAME = 'category';
+    public const DIR = '/assets/Modules';
+    public const DISK_NAME = 'module';
+
     protected $guarded = [];
 
 
     public function mediaFirst()
     {
         return $this->morphOne(Media::class,'meddiable');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 
 }

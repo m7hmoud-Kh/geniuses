@@ -2,11 +2,11 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Category;
+use App\Models\Module;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoryResource extends JsonResource
+class ModuleResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -21,8 +21,9 @@ class CategoryResource extends JsonResource
             'price' => $this->price,
             'allow_in_days' => $this->allow_in_days,
             'status' => $this->status,
+            'category' => new CategoryResource($this->whenLoaded('category')),
             'mediaFirst' => new MediaResource($this->whenLoaded('mediaFirst')),
-            'ImagePath' => $this->whenLoaded('mediaFirst',Category::DIR),
+            'ImagePath' => $this->whenLoaded('mediaFirst',Module::DIR),
             'created_at' => $this->created_at,
         ];
     }
