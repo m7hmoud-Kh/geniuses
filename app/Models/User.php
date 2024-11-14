@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Services\Utils\Getterable;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,7 +16,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use Spatie\Permission\Traits\HasRoles;
 class User  extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Getterable;
 
     protected $guarded = [];
     protected $hidden = [
@@ -27,13 +28,6 @@ class User  extends Authenticatable implements JWTSubject
         $this->attributes['password'] = Hash::make($value);
     }
 
-    public function getCreatedAtAttribute()
-    {
-
-        $created_at = $this->attributes['created_at'] ? new DateTime($this->attributes['created_at']) : null;
-        return $created_at ? $created_at->format('Y m-d h:i:s') : null;
-
-    }
     public function getEmailVerifiedAtAttribute()
     {
         $email_verified_at = $this->attributes['email_verified_at'] ? new DateTime($this->attributes['email_verified_at']) : null;

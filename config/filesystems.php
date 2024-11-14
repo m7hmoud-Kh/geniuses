@@ -43,7 +43,14 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
-
+        'category' => [
+            'driver' => 'local',
+            'root' => public_path() . '/assets/Categories/',
+        ],
+        'module' => [
+            'driver' => 'local',
+            'root' => public_path() . '/assets/Modules/',
+        ],
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
