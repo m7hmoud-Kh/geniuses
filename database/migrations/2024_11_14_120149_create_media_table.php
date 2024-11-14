@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('file_name');
             $table->boolean('file_status');
             $table->unsignedInteger('file_sort')->default(0);
+            $table->string('file_type')->default('image');
             $table->morphs('meddiable');
             $table->timestamps();
         });

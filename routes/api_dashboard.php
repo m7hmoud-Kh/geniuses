@@ -25,4 +25,6 @@ Route::middleware('auth:admin')->group(function(){
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('modules', ModuleController::class);
     Route::apiResource('fqas', FqaController::class);
+
+    Route::delete('/modules/{attachmentId}/attachment',[ModuleController::class,'destoryAttachmentById']);
 });

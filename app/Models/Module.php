@@ -21,6 +21,11 @@ class Module extends Model
         return $this->morphOne(Media::class,'meddiable');
     }
 
+    public function attachments()
+    {
+        return $this->morphMany(Media::class,'meddiable');
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);

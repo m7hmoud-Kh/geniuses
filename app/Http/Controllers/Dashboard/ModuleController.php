@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Module\StoreModuleRequest;
 use App\Http\Requests\Dashboard\Module\UpdateModuleRequest;
+use App\Models\Media;
 use App\Models\Module;
 use App\Services\Models\ModuleModel;
 use Illuminate\Http\Request;
@@ -57,5 +58,10 @@ class ModuleController extends Controller
     public function destroy(Module $module)
     {
         return $this->moduelModel->destoryModule($module);
+    }
+
+    public function destoryAttachmentById($attachmentId)
+    {
+        return $this->moduelModel->destoryAttachment($attachmentId);
     }
 }

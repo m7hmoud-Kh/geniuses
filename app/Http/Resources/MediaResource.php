@@ -18,6 +18,7 @@ class MediaResource extends JsonResource
             'id' => $this->id,
             'name' => $this->file_name,
             'meddiable_type' => $this->meddiable_type,
+            'file_type' => $this->file_type
         ];
     }
 }
