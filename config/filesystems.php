@@ -51,6 +51,10 @@ return [
             'driver' => 'local',
             'root' => public_path() . '/assets/Modules/',
         ],
+        'question' => [
+            'driver' => 'local',
+            'root' => public_path() . '/assets/Questions/',
+        ],
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

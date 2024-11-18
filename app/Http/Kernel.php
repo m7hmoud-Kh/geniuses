@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CombineTypeOfExamInStoreQuestion;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -67,6 +68,8 @@ class Kernel extends HttpKernel
         'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+
+        'combine_exam_type' => CombineTypeOfExamInStoreQuestion::class
 
     ];
 }
