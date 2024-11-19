@@ -2,10 +2,11 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FqaResource extends JsonResource
+class OptionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +17,9 @@ class FqaResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'question' => $this->question,
-            'answer' => $this->answer,
-            'category' => new CategoryResource($this->whenLoaded('category')),
-            'status' => $this->status,
+            'option' => json_decode($this->option),
+            'is_correct' => $this->is_correct,
+            'question' => new QuestionResource($this->whenLoaded('question')),
             'created_at' => $this->created_at
         ];
     }

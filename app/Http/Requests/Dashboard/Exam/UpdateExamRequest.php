@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Dashboard\Fqa;
+namespace App\Http\Requests\Dashboard\Exam;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreFqaRequest extends FormRequest
+class UpdateExamRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +23,11 @@ class StoreFqaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'question' => ['required','string'],
-            'answer' => ['required','string'],
-            'category_id' => ['required','exists:categories,id']
+            'name' => ['string',Rule::unique('exams')->ignore($this->exam->id)],
+            'time_in_min' => ['numeric'],
+            'type' =>  [Rule::in(['mcq','flash','table'])],
+            'module_id' => ['exists:modules,id'],
+            'status' => ['boolean']
         ];
     }
 }

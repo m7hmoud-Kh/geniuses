@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FqaResource extends JsonResource
+class ExamResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +16,12 @@ class FqaResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'question' => $this->question,
-            'answer' => $this->answer,
-            'category' => new CategoryResource($this->whenLoaded('category')),
+            'name' => $this->name,
+            'type' => $this->type,
+            'time_in_min' => $this->time_in_min,
             'status' => $this->status,
+            'module' => new ModuleResource($this->whenLoaded('module')),
+            'questions' => QuestionResource::collection($this->whenLoaded('quesitons')),
             'created_at' => $this->created_at
         ];
     }

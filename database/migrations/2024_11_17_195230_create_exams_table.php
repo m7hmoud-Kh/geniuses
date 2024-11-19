@@ -11,12 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fqas', function (Blueprint $table) {
+        Schema::create('exams', function (Blueprint $table) {
             $table->id();
-            $table->string('question');
-            $table->string('answer');
-            $table->foreignId('category_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('module_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('name')->unique();
+            $table->integer('time_in_min')->nullable();
             $table->boolean('status')->default(true);
+            $table->enum('type',[
+                'mcq',
+                'flash',
+                'table'
+            ]);
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fqas');
+        Schema::dropIfExists('exams');
     }
 };

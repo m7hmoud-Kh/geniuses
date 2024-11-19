@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Module;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Exam>
  */
-class CategoryFactory extends Factory
+class ExamFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,9 +19,9 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => fake()->unique()->sentence(3,false),
-            'price' => fake()->randomFloat(2,100,800),
-            'allow_in_days' => fake()->numberBetween(10,800),
-            'description' => fake()->sentence(),
+            'time_in_min' => fake()->randomNumber(2),
+            'type' => fake()->randomElement(['mcq','flash','table']),
+            'module_id' => Module::inRandomOrder()->first()->id,
         ];
     }
 }

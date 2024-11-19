@@ -6,13 +6,16 @@ use App\Services\Utils\Getterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Fqa extends Model
+class Option extends Model
 {
     use HasFactory, Getterable;
+
     protected $guarded = [];
 
-    public function category()
+
+    public function question()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Question::class);
     }
+
 }

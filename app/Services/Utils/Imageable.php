@@ -32,7 +32,9 @@ trait Imageable {
 
     public function deleteImage($diskName,$old_image)
     {
-        Storage::disk($diskName)->delete($old_image->file_name);
+        if(isset($old_image->file_name)){
+            Storage::disk($diskName)->delete($old_image->file_name);
+        }
     }
 
     private function insertImage($title, $image, $dir)

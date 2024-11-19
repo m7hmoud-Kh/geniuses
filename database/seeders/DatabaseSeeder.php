@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Admin;
 use App\Models\Category;
+use App\Models\Exam;
 use App\Models\Fqa;
 use App\Models\Module;
 use Database\Factories\ModuleFactory;
@@ -22,5 +23,6 @@ class DatabaseSeeder extends Seeder
         Category::factory()->count(20)->create();
         Module::factory()->count(60)->create();
         Fqa::factory()->count(50)->create();
+        Exam::factory()->count(10)->create();
     }
 }

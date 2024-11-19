@@ -15,7 +15,7 @@ class FqaModel extends Model
 
     public function getAllFqa()
     {
-        $categories = Fqa::with('module')->latest()->paginate();
+        $categories = Fqa::with('category')->latest()->paginate();
         return response()->json([
             'Status' => Response::HTTP_OK,
             'data' => FqaResource::collection($categories),
@@ -34,7 +34,7 @@ class FqaModel extends Model
 
     public function showFqa(Fqa $fqa)
     {
-        $fqa = $fqa->load(['module']);
+        $fqa = $fqa->load(['category']);
         return response()->json([
             'data' => new FqaResource($fqa)
         ]);
