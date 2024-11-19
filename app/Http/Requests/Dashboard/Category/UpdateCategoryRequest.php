@@ -26,8 +26,9 @@ class UpdateCategoryRequest extends FormRequest
             'name' => ['string', Rule::unique('categories')->ignore($this->category->id)],
             'price' => [ 'numeric', 'min:1'],
             'allow_in_days' => [ 'numeric', 'min:1'],
-            'image' => ['nullable', 'mimes:jpg,png,jpeg',],
-            'status' => ['boolean']
+            'image' => ['nullable', 'mimes:jpg,png,jpeg'],
+            'status' => ['boolean'],
+            'description' => ['string']
         ];
     }
 }

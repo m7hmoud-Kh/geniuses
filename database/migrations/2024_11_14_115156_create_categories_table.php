@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->text('description');
             $table->float('price');
             $table->integer('allow_in_days');
             $table->boolean('status')->default(true);

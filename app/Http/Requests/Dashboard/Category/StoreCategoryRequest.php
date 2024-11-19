@@ -25,7 +25,8 @@ class StoreCategoryRequest extends FormRequest
             'name' => ['required','string','unique:categories'],
             'price' => ['required','numeric'],
             'allow_in_days' => ['required','numeric'],
-            'image' => ['required','mimes:jpg,png,jpeg']
+            'image' => ['required','mimes:jpg,png,jpeg'],
+            'description' => ['required','string']
         ];
     }
 }

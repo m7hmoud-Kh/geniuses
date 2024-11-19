@@ -20,6 +20,7 @@ class CategoryFactory extends Factory
             'name' => fake()->unique()->sentence(3,false),
             'price' => fake()->randomFloat(2,100,800),
             'allow_in_days' => fake()->numberBetween(10,800),
+            'description' => fake()->sentence(),
         ];
     }
 }
