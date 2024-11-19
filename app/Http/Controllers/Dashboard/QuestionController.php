@@ -43,9 +43,9 @@ class QuestionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateQuestionRequest $request, Question $question)
+    public function update(UpdateQuestionRequest $request, $questionId)
     {
-        return $this->questionModel->updateQuestion($request, $question);
+        return $this->questionModel->updateQuestion($request, $questionId);
     }
 
     /**

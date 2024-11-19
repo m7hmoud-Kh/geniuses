@@ -44,10 +44,13 @@ class OptionModel extends Model
         ]);
     }
 
-    public function updateOption(Request $request, Option $option)
+    public function updateOption(Request $request, $optionId)
     {
-        $data = $request->validated();
-        $data['option'] = json_encode($request->option);
+        $option = Option::findOrFail($optionId);
+        $data = $request->except(['question_id','type']);
+        if($request->option){
+            $data['option'] = json_encode($request->option);
+        }
         $option->update($data);
 
         return response()->json([

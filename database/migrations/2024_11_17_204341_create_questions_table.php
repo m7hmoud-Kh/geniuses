@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('exam_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->json('question');
             $table->decimal('point');
-            $table->string('image')->nullable();
             $table->string('explanation')->nullable();
             $table->timestamps();
         });

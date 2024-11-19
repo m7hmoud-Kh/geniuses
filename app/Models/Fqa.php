@@ -11,8 +11,8 @@ class Fqa extends Model
     use HasFactory, Getterable;
     protected $guarded = [];
 
-    public function module()
+    public function category()
     {
-        return $this->belongsTo(Module::class);
+        return $this->belongsTo(Category::class);
     }
 }

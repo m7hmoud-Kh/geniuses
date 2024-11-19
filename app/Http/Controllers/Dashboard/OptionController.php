@@ -46,9 +46,9 @@ class OptionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateOptionRequest $request, Option $option)
+    public function update(UpdateOptionRequest $request, $optionId)
     {
-        return $this->optionModel->updateOption($request, $option);
+        return $this->optionModel->updateOption($request, $optionId);
     }
 
     /**

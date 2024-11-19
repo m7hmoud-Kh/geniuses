@@ -20,7 +20,7 @@ class CombineTypeOfExamInStoreQuestion
         if($request->exam_id){
             $exam = Exam::findOrFail($request->exam_id);
         }else {
-            $question = Question::with('exam')->whereId($request->question)->first();
+            $question = Question::with('exam')->whereId($request->questionId)->first();
             $exam = $question->exam;
         }
         $request->merge(['type' => $exam->type]);

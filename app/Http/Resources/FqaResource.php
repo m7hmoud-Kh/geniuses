@@ -18,7 +18,7 @@ class FqaResource extends JsonResource
             'id' => $this->id,
             'question' => $this->question,
             'answer' => $this->answer,
-            'module' => new ModuleResource($this->whenLoaded('module')),
+            'category' => new CategoryResource($this->whenLoaded('category')),
             'status' => $this->status,
             'created_at' => $this->created_at
         ];

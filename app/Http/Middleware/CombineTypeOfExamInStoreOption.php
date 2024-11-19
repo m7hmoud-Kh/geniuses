@@ -23,7 +23,7 @@ class CombineTypeOfExamInStoreOption
         }else {
             $option = Option::with(['question' => function($q){
                 return $q->with('exam');
-            }])->whereId($request->option)->first();
+            }])->findOrFail($request->optionId);
             $exam = $option->question->exam;
         }
         $request->merge(['type' => $exam->type]);

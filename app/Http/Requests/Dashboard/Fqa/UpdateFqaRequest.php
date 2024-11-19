@@ -24,7 +24,7 @@ class UpdateFqaRequest extends FormRequest
         return [
             'question' => ['string'],
             'answer' => ['string'],
-            'module_id' => ['exists:modules,id'],
+            'category_id' => ['exists:categories,id'],
             'status' => ['boolean']
         ];
     }

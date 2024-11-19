@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\ExamController;
 use App\Http\Controllers\Dashboard\FqaController;
 use App\Http\Controllers\Dashboard\ModuleController;
+use App\Http\Controllers\Dashboard\OptionController;
 use App\Http\Controllers\Dashboard\QuestionController;
 use App\Http\Controllers\PasswordResetController;
 use Illuminate\Support\Facades\Route;
@@ -27,10 +28,26 @@ Route::middleware('auth:admin')->group(function(){
     Route::apiResource('modules', ModuleController::class);
     Route::apiResource('fqas', FqaController::class);
     Route::apiResource('exams', ExamController::class);
-    Route::apiResource('questions', QuestionController::class)
-    ->only(['store', 'update'])
-    ->middleware('combine_exam_type');
-    Route::apiResource('questions', QuestionController::class)
-    ->except(['store', 'update']);
+
+    Route::controller(QuestionController::class)->prefix('/questions')->group(function(){
+        Route::middleware('combine_exam_type_in_question')->group(function(){
+            Route::put('/{questionId}','update');
+            Route::post('/','store');
+        });
+        Route::get('/','index');
+        Route::get('/{question}','show');
+        Route::delete('/{question}','destory');
+    });
+
+    Route::controller(OptionController::class)->prefix('/options')->group(function(){
+        Route::middleware('combine_exam_type_in_option')->group(function(){
+            Route::put('/{optionId}','update');
+            Route::post('/','store');
+        });
+        Route::get('/','index');
+        Route::get('/{option}','show');
+        Route::delete('/{option}','destory');
+    });
+
     Route::delete('/modules/{attachmentId}/attachment',[ModuleController::class,'destoryAttachmentById']);
 });

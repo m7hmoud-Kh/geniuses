@@ -16,11 +16,6 @@ class Question extends Model
     protected $guarded = [];
 
 
-    // public function getQuestionAttribute()
-    // {
-    //     return json_encode($this->attributes['question']);
-    // }
-
     public function mediaFirst()
     {
         return $this->morphOne(Media::class,'meddiable');

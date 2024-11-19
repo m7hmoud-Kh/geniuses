@@ -36,7 +36,7 @@ class QuestionModel extends Model
 
     public function storeQuestion(Request $request)
     {
-        $data = $request->validated();
+        $data = $request->except(['image','type']);
         $data['question'] = json_encode($request->question);
         $question = Question::create($data);
 
@@ -60,18 +60,20 @@ class QuestionModel extends Model
         ]);
     }
 
-    public function updateQuestion(Request $request, Question $question)
+    public function updateQuestion(Request $request, $questionId)
     {
-        $data = $request->validated();
-        $data['question'] = json_encode($request->question);
+        $question = Question::findOrFail($questionId);
+        $data = $request->except(['type','image','exam_id']);
+        if($request->question){
+            $data['question'] = json_encode($request->question);
+        }
         $question->update($data);
         if($request->file('image')){
-            $this->dataImage['title'] = $request->type;
+            $this->dataImage['title'] = $questionId;
             $this->dataImage['image'] = $request->image;
             $this->dataModel['model'] = $question;
             $this->deleteImage(Question::DISK_NAME,$question->mediaFirst);
             $this->handleImageNameAndInsertInDb($this->dataImage, $this->dataModel);
-            $question->update($request->except(['image']));
         }
         return response()->json([
             'status' => Response::HTTP_ACCEPTED,

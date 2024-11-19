@@ -24,7 +24,7 @@ class StoreFqaRequest extends FormRequest
         return [
             'question' => ['required','string'],
             'answer' => ['required','string'],
-            'module_id' => ['required','exists:modules,id']
+            'category_id' => ['required','exists:categories,id']
         ];
     }
 }

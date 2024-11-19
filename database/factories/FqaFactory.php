@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Module;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,7 +20,7 @@ class FqaFactory extends Factory
         return [
             'question' => fake()->unique()->sentence(3,false),
             'answer' => fake()->unique()->sentence(6,false),
-            'module_id' => Module::inRandomOrder()->first()->id
+            'category_id' => Category::inRandomOrder()->first()->id
         ];
     }
 }
