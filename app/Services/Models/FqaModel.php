@@ -13,9 +13,9 @@ class FqaModel extends Model
 {
     use paginatable;
 
-    public function getAllFqa()
+    public function getAllFqa($categoryId)
     {
-        $categories = Fqa::with('category')->latest()->paginate();
+        $categories = Fqa::with('category')->where('category_id',$categoryId)->latest()->paginate();
         return response()->json([
             'Status' => Response::HTTP_OK,
             'data' => FqaResource::collection($categories),

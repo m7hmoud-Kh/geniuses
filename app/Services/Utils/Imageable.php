@@ -30,10 +30,13 @@ trait Imageable {
         }
     }
 
-    public function deleteImage($diskName,$old_image)
+    public function deleteImage($diskName,$old_image,$dataModel)
     {
         if(isset($old_image->file_name)){
+            $model = $dataModel['model'];
+            $relation = $dataModel['relation'];
             Storage::disk($diskName)->delete($old_image->file_name);
+            $model->$relation()->where('id', $old_image->id)->delete();
         }
     }
 

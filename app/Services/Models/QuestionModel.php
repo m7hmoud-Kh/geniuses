@@ -24,9 +24,9 @@ class QuestionModel extends Model
         'relation' => 'mediaFirst'
     ];
 
-    public function getAllQuestion()
+    public function getAllQuestion($examId)
     {
-        $questions = Question::with('exam')->latest()->paginate();
+        $questions = Question::with('exam','mediaFirst')->where('exam_id',$examId)->latest()->paginate();
         return response()->json([
             'Status' => Response::HTTP_OK,
             'data' => QuestionResource::collection($questions),
@@ -72,7 +72,7 @@ class QuestionModel extends Model
             $this->dataImage['title'] = $questionId;
             $this->dataImage['image'] = $request->image;
             $this->dataModel['model'] = $question;
-            $this->deleteImage(Question::DISK_NAME,$question->mediaFirst);
+            $this->deleteImage(Question::DISK_NAME,$question->mediaFirst, $this->dataModel);
             $this->handleImageNameAndInsertInDb($this->dataImage, $this->dataModel);
         }
         return response()->json([
@@ -83,8 +83,9 @@ class QuestionModel extends Model
 
     public function destoryQuestion($question)
     {
+        $this->dataModel['model'] = $question;
         if($question->mediaFirst){
-            $this->deleteImage(Question::DISK_NAME, $question->mediaFirst);
+            $this->deleteImage(Question::DISK_NAME, $question->mediaFirst, $this->dataModel);
         }
         $question->delete();
         return response()->json([],Response::HTTP_NO_CONTENT);

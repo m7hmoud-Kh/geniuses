@@ -26,7 +26,6 @@ class UpdateModuleRequest extends FormRequest
             'name' => ['string', Rule::unique('modules')->ignore($this->module->id)],
             'price' => [ 'numeric', 'min:1'],
             'allow_in_days' => [ 'numeric', 'min:1'],
-            'image' => ['nullable', 'mimes:jpg,png,jpeg',],
             'status' => ['boolean'],
             'category_id' => ['exists:categories,id']
 

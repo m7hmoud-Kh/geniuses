@@ -36,7 +36,7 @@ Route::middleware('auth:admin')->group(function(){
         });
         Route::get('/','index');
         Route::get('/{question}','show');
-        Route::delete('/{question}','destory');
+        Route::delete('/{question}','destroy');
     });
 
     Route::controller(OptionController::class)->prefix('/options')->group(function(){
@@ -46,8 +46,8 @@ Route::middleware('auth:admin')->group(function(){
         });
         Route::get('/','index');
         Route::get('/{option}','show');
-        Route::delete('/{option}','destory');
+        Route::delete('/{option}','destroy');
     });
 
-    Route::delete('/modules/{attachmentId}/attachment',[ModuleController::class,'destoryAttachmentById']);
+    Route::delete('/modules/{attachmentId}/attachment',[ModuleController::class,'destroyAttachmentById']);
 });

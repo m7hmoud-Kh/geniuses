@@ -7,6 +7,7 @@ use App\Http\Requests\Dashboard\Question\StoreQuestionRequest;
 use App\Http\Requests\Dashboard\Question\UpdateQuestionRequest;
 use App\Models\Question;
 use App\Services\Models\QuestionModel;
+use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
@@ -19,9 +20,9 @@ class QuestionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->questionModel->getAllQuestion();
+        return $this->questionModel->getAllQuestion($request->examId);
     }
 
     /**

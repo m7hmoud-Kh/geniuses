@@ -22,9 +22,9 @@ class ModuleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->moduelModel->getAllModules();
+        return $this->moduelModel->getAllModules($request->categoryId);
     }
 
     /**
@@ -60,8 +60,8 @@ class ModuleController extends Controller
         return $this->moduelModel->destoryModule($module);
     }
 
-    public function destoryAttachmentById($attachmentId)
+    public function destroyAttachmentById($attachmentId)
     {
-        return $this->moduelModel->destoryAttachment($attachmentId);
+        return $this->moduelModel->destroyAttachment($attachmentId);
     }
 }

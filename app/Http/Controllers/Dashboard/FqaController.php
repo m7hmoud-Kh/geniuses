@@ -19,9 +19,9 @@ class FqaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->fqaModel->getAllFqa();
+        return $this->fqaModel->getAllFqa($request->categoryId);
     }
 
     /**

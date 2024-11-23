@@ -20,9 +20,9 @@ class ExamController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->examModel->getAllExams();
+        return $this->examModel->getAllExams($request->moduleId);
     }
 
     /**

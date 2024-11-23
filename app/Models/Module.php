@@ -15,12 +15,6 @@ class Module extends Model
 
     protected $guarded = [];
 
-
-    public function mediaFirst()
-    {
-        return $this->morphOne(Media::class,'meddiable');
-    }
-
     public function attachments()
     {
         return $this->morphMany(Media::class,'meddiable');

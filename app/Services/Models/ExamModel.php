@@ -13,9 +13,9 @@ class ExamModel extends Model
 {
     use paginatable;
 
-    public function getAllExams()
+    public function getAllExams($moduleId)
     {
-        $exams = Exam::with('module')->latest()->paginate();
+        $exams = Exam::with('module')->where('module_id',$moduleId)->latest()->paginate();
         return response()->json([
             'Status' => Response::HTTP_OK,
             'data' => ExamResource::collection($exams),
