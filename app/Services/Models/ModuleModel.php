@@ -23,12 +23,12 @@ class ModuleModel extends Model
     ];
     public $dataModel = [
         'model' => '',
-        'relation' => 'mediaFirst'
+        'relation' => ''
     ];
 
-    public function getAllModules()
+    public function getAllModules($categoryId)
     {
-        $modules = Module::with('mediaFirst','category')->latest()->paginate();
+        $modules = Module::with('category')->where('category_id',$categoryId)->latest()->paginate();
         return response()->json([
             'Status' => Response::HTTP_OK,
             'data' => ModuleResource::collection($modules),
@@ -40,9 +40,7 @@ class ModuleModel extends Model
     {
         $module = Module::create($request->except(['image','attachments']));
         $this->dataImage['title'] = $request->name;
-        $this->dataImage['image'] = $request->image;
         $this->dataModel['model'] = $module;
-        $this->handleImageNameAndInsertInDb($this->dataImage,$this->dataModel);
         if($request->file('attachments')){
             $this->dataModel['relation'] = 'attachments';
             $this->insertMultipleImage($request->attachments,$this->dataImage['title'],$this->dataModel['model'],
@@ -56,7 +54,7 @@ class ModuleModel extends Model
 
     public function showModule(Module $module)
     {
-        $module = $module->load(['mediaFirst','category','attachments']);
+        $module = $module->load(['category','attachments']);
         return response()->json([
             'data' => new ModuleResource($module)
         ]);
@@ -66,16 +64,11 @@ class ModuleModel extends Model
     {
         $this->dataImage['title'] = $request->name ?? $module->name;
         $this->dataModel['model'] = $module;
-        if($request->file('image')){
-            $this->dataImage['image'] = $request->image;
-            $this->deleteImage(Module::DISK_NAME,$module->mediaFirst);
-            $this->handleImageNameAndInsertInDb($this->dataImage, $this->dataModel);
-        }
         if($request->file('attachments')){
             $this->dataModel['relation'] = 'attachments';
             $this->insertMultipleImage($request->attachments,$this->dataImage['title'],$this->dataModel['model'],Module::DIR, $this->dataModel['relation']);
         }
-        $module->update($request->except(['image','attachments']));
+        $module->update($request->except(['attachments']));
         return response()->json([
             'status' => Response::HTTP_ACCEPTED,
             'data' => new ModuleResource($module)
@@ -84,17 +77,19 @@ class ModuleModel extends Model
 
     public function destoryModule($module)
     {
-        $this->deleteImage(Module::DISK_NAME,$module->mediaFirst);
         $this->deleteIMageFromLoaclStorage(Module::DISK_NAME, $module->attachments);
         $module->delete();
         return response()->json([],Response::HTTP_NO_CONTENT);
     }
 
-    public function destoryAttachment($attachmentId)
+    public function destroyAttachment($attachmentId)
     {
         $media = Media::where('file_type','document')->findOrFail($attachmentId);
-        $this->deleteImage(Module::DISK_NAME,$media);
-        $media->delete();
+        $module = Module::whereId($media->meddiable_id)->first();
+        $this->dataModel['model'] = $module;
+        $this->dataModel['relation'] = 'attachments';
+        $this->deleteImage(Module::DISK_NAME,$media,$this->dataModel);
+        // $media->delete();
         return response()->json([],Response::HTTP_NO_CONTENT);
     }
 }

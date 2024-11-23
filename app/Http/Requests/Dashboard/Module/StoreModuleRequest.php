@@ -26,7 +26,6 @@ class StoreModuleRequest extends FormRequest
             'price' => ['required','numeric'],
             'allow_in_days' => ['required','numeric'],
             'category_id' => ['required','exists:categories,id'],
-            'image' => ['required','mimes:jpg,png,jpeg'],
             'attachments.*' => ['mimes:pdf']
         ];
     }

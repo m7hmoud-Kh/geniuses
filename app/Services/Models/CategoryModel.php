@@ -58,14 +58,14 @@ class CategoryModel extends Model
 
     public function updateCategory(Request $request,Category $category)
     {
+        $category->update($request->except(['image']));
         if($request->file('image')){
             $this->dataImage['title'] = $request->name ?? $category->name;
             $this->dataImage['image'] = $request->image;
             $this->dataModel['model'] = $category;
-            $this->deleteImage(Category::DISK_NAME,$category->mediaFirst);
+            $this->deleteImage(Category::DISK_NAME,$category->mediaFirst,$this->dataModel);
             $this->handleImageNameAndInsertInDb($this->dataImage, $this->dataModel);
         }
-        $category->update($request->except(['image']));
         return response()->json([
             'status' => Response::HTTP_ACCEPTED,
             'data' => new CategoryResource($category)
@@ -74,7 +74,8 @@ class CategoryModel extends Model
 
     public function destoryCategory($category)
     {
-        $this->deleteImage(Category::DISK_NAME,$category->mediaFirst);
+        $this->dataModel['model'] = $category;
+        $this->deleteImage(Category::DISK_NAME,$category->mediaFirst, $this->dataModel);
         $category->delete();
         return response()->json([],Response::HTTP_NO_CONTENT);
     }

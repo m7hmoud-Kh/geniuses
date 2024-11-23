@@ -22,7 +22,6 @@ class ModuleResource extends JsonResource
             'allow_in_days' => $this->allow_in_days,
             'status' => $this->status,
             'category' => new CategoryResource($this->whenLoaded('category')),
-            'mediaFirst' => new MediaResource($this->whenLoaded('mediaFirst')),
             'attachments' => MediaResource::collection($this->whenLoaded('attachments')),
             'ImagePath' => $this->whenLoaded('mediaFirst',Module::DIR),
             'created_at' => $this->created_at,
