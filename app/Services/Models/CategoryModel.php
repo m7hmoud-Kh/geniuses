@@ -35,6 +35,16 @@ class CategoryModel extends Model
         ]);
     }
 
+    public function getAllActiveCategories()
+    {
+        $categories = Category::with('mediaFirst')->Status()->latest()->paginate();
+        return response()->json([
+            'Status' => Response::HTTP_OK,
+            'data' => CategoryResource::collection($categories),
+            'meta' => $this->getPaginatable($categories)
+        ]);
+    }
+
     public function storeCategory(Request $request)
     {
         $category = Category::create($request->except(['image']));
@@ -50,9 +60,17 @@ class CategoryModel extends Model
 
     public function showCategory(Category $categoy)
     {
-        $categoy = $categoy->load(['mediaFirst']);
+        $categoy = $categoy->load(['mediaFirst','fqa']);
         return response()->json([
             'data' => new CategoryResource($categoy)
+        ]);
+    }
+
+    public function showActiveCategory($categoryId)
+    {
+        $category = Category::with(['mediaFirst','fqas','modules'])->findOrFail($categoryId);
+        return response()->json([
+            'data' => new CategoryResource($category)
         ]);
     }
 

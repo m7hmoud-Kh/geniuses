@@ -24,10 +24,4 @@ class Module extends Model
     {
         return $this->belongsTo(Category::class);
     }
-
-    public function faqs()
-    {
-        return $this->hasMany(Fqa::class);
-    }
-
 }
