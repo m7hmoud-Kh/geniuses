@@ -21,4 +21,19 @@ class Category extends Model
         return $this->morphOne(Media::class,'meddiable');
     }
 
+    public function fqas()
+    {
+        return $this->hasMany(Fqa::class);
+    }
+
+    public function modules()
+    {
+        return $this->hasMany(Module::class);
+    }
+
+    public function scopeStatus($query)
+    {
+        return $query->where('status',true);
+    }
+
 }
