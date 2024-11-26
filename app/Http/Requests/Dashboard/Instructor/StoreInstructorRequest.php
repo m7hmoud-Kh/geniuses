@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Dashboard\Category;
+namespace App\Http\Requests\Dashboard\Instructor;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCategoryRequest extends FormRequest
+class StoreInstructorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,8 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required','string','unique:categories'],
-            'price' => ['required','numeric'],
-            'allow_in_days' => ['required','numeric'],
-            'image' => ['required','mimes:jpg,png,jpeg'],
-            'description' => ['required','string'],
-            'instructor_id' => ['required','exists:instructors,id']
+            'name' => ['required','string','unique:instructors'],
+            'title' => ['required','string']
         ];
     }
 }

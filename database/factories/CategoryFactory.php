@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Instructor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,6 +22,7 @@ class CategoryFactory extends Factory
             'price' => fake()->randomFloat(2,100,800),
             'allow_in_days' => fake()->numberBetween(10,800),
             'description' => fake()->sentence(),
+            'instructor_id' => Instructor::inRandomOrder()->first()->id,
         ];
     }
 }

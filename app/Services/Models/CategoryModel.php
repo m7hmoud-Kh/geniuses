@@ -60,7 +60,7 @@ class CategoryModel extends Model
 
     public function showCategory(Category $categoy)
     {
-        $categoy = $categoy->load(['mediaFirst','fqa']);
+        $categoy = $categoy->load(['mediaFirst','instructor']);
         return response()->json([
             'data' => new CategoryResource($categoy)
         ]);
@@ -68,7 +68,7 @@ class CategoryModel extends Model
 
     public function showActiveCategory($categoryId)
     {
-        $category = Category::with(['mediaFirst','fqas','modules'])->findOrFail($categoryId);
+        $category = Category::with(['mediaFirst','modules','instructor'])->findOrFail($categoryId);
         return response()->json([
             'data' => new CategoryResource($category)
         ]);

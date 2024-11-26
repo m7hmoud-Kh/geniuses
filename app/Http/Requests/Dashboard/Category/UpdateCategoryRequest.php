@@ -28,7 +28,8 @@ class UpdateCategoryRequest extends FormRequest
             'allow_in_days' => [ 'numeric', 'min:1'],
             'image' => ['nullable', 'mimes:jpg,png,jpeg'],
             'status' => ['boolean'],
-            'description' => ['string']
+            'description' => ['string'],
+            'instructor_id' => ['exists:instructors,id']
         ];
     }
 }
