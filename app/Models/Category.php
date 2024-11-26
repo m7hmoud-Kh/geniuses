@@ -21,6 +21,11 @@ class Category extends Model
         return $this->morphOne(Media::class,'meddiable');
     }
 
+    public function instructor()
+    {
+        return $this->belongsTo(Instructor::class);
+    }
+
     public function fqas()
     {
         return $this->hasMany(Fqa::class);
