@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->text('description');
             $table->boolean('status')->default(true);
+            $table->foreignId('module_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

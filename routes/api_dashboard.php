@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\ExamController;
 use App\Http\Controllers\Dashboard\FqaController;
 use App\Http\Controllers\Dashboard\InstructorController;
+use App\Http\Controllers\Dashboard\LessonController;
 use App\Http\Controllers\Dashboard\ModuleController;
 use App\Http\Controllers\Dashboard\OptionController;
 use App\Http\Controllers\Dashboard\QuestionController;
@@ -30,6 +31,7 @@ Route::middleware('auth:admin')->group(function(){
     Route::apiResource('fqas', FqaController::class);
     Route::apiResource('exams', ExamController::class);
     Route::apiResource('instructors', InstructorController::class);
+    Route::apiResource('lessons', LessonController::class);
 
     Route::controller(QuestionController::class)->prefix('/questions')->group(function(){
         Route::middleware('combine_exam_type_in_question')->group(function(){

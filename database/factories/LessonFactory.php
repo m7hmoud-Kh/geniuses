@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Module;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class LessonFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->unique()->sentence(3),
+            'description' => fake()->sentence(6),
+            'url' => fake()->url(),
+            'module_id' => Module::inRandomOrder()->first()->id,
         ];
     }
 }

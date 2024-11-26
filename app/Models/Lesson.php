@@ -2,10 +2,18 @@
 
 namespace App\Models;
 
+use App\Services\Utils\Getterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Lesson extends Model
 {
-    use HasFactory;
+    use HasFactory, Getterable;
+    protected $guarded = [];
+
+    public function module()
+    {
+        return $this->belongsTo(Module::class);
+    }
+
 }
