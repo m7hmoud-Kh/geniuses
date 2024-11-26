@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Exam;
 use App\Models\Fqa;
 use App\Models\Instructor;
+use App\Models\Lesson;
 use App\Models\Module;
 use Database\Factories\ModuleFactory;
 use Illuminate\Database\Seeder;
@@ -26,5 +27,6 @@ class DatabaseSeeder extends Seeder
         Module::factory()->count(60)->create();
         Fqa::factory()->count(50)->create();
         Exam::factory()->count(10)->create();
+        Lesson::factory()->count(20)->create();
     }
 }
