@@ -3,6 +3,8 @@
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\Website\AuthController;
 use App\Http\Controllers\Website\CategoryController;
+use App\Http\Controllers\Website\ModuleController;
+use App\Http\Controllers\Website\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -24,3 +26,24 @@ Route::controller(CategoryController::class)->prefix('/categories')->group(funct
     Route::get('/','getAllActiveCategories');
     Route::get('/{categoryId}','showCategoryById');
 });
+
+
+Route::middleware('auth:api')->group(function(){
+
+    Route::controller(SubscriptionController::class)->group(function(){
+        Route::post('/create-payment-intent','createPaymentIntent');
+    });
+
+
+    Route::middleware('check.subscription')->group(function(){
+        Route::controller(ModuleController::class)->group(function(){
+            Route::get('/{category_id}/modules/{module_id}','show');
+        });
+    });
+});
+
+
+
+
+
+

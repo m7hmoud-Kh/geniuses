@@ -37,7 +37,7 @@ class CategoryModel extends Model
 
     public function getAllActiveCategories()
     {
-        $categories = Category::with('mediaFirst')->Status()->latest()->paginate();
+        $categories = Category::with('mediaFirst','modules','fqas','instructor')->Status()->latest()->paginate();
         return response()->json([
             'Status' => Response::HTTP_OK,
             'data' => CategoryResource::collection($categories),
@@ -68,7 +68,7 @@ class CategoryModel extends Model
 
     public function showActiveCategory($categoryId)
     {
-        $category = Category::with(['mediaFirst','modules','instructor'])->findOrFail($categoryId);
+        $category = Category::with(['mediaFirst','modules','instructor','fqas'])->findOrFail($categoryId);
         return response()->json([
             'data' => new CategoryResource($category)
         ]);

@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckSubscription;
 use App\Http\Middleware\CombineTypeOfExamInStoreOption;
 use App\Http\Middleware\CombineTypeOfExamInStoreQuestion;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -71,6 +72,8 @@ class Kernel extends HttpKernel
         'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
 
         'combine_exam_type_in_question' => CombineTypeOfExamInStoreQuestion::class,
-        'combine_exam_type_in_option' => CombineTypeOfExamInStoreOption::class
+        'combine_exam_type_in_option' =>
+        CombineTypeOfExamInStoreOption::class,
+        'c' => CheckSubscription::class
     ];
 }
