@@ -11,6 +11,8 @@ use App\Models\Fqa;
 use App\Models\Instructor;
 use App\Models\Lesson;
 use App\Models\Module;
+use App\Models\Subscription;
+use App\Models\User;
 use Database\Factories\ModuleFactory;
 use Illuminate\Database\Seeder;
 
@@ -22,11 +24,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Admin::factory()->count(1)->create();
+        User::factory()->count(1)->create();
         Instructor::factory()->count(10)->create();
         Category::factory()->count(20)->create();
         Module::factory()->count(60)->create();
         Fqa::factory()->count(50)->create();
         Exam::factory()->count(10)->create();
         Lesson::factory()->count(20)->create();
+        Subscription::factory()->count(5)->forCategory()->create();
+        Subscription::factory()->count(5)->forModule()->create();
     }
 }

@@ -5,11 +5,13 @@ namespace App\Services\Models;
 use App\Http\Resources\ModuleResource;
 use App\Models\Media;
 use App\Models\Module;
+use App\Models\Subscription;
 use App\Services\Utils\Imageable;
 use App\Services\Utils\paginatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class ModuleModel extends Model
 {
@@ -57,6 +59,16 @@ class ModuleModel extends Model
         $module = $module->load(['category','attachments']);
         return response()->json([
             'data' => new ModuleResource($module)
+        ]);
+    }
+
+    public function showActiveModulesSubscripted()
+    {
+        $subscriptonsModules = Subscription::where('user_id',Auth::user()->id)
+        ->pluck('module_id');
+        $modules = Module::with(['exams','lessons'])->Status()->whereIn('id',$subscriptonsModules)->get();
+        return response()->json([
+            'data' => ModuleResource::collection($modules)
         ]);
     }
 

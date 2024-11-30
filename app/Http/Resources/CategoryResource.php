@@ -25,6 +25,7 @@ class CategoryResource extends JsonResource
             'mediaFirst' => new MediaResource($this->whenLoaded('mediaFirst')),
             'modules' => ModuleResource::collection($this->whenLoaded('modules')),
             'instructor' => new InstructorResource($this->whenLoaded('instructor')),
+            'fqas' =>  FqaResource::collection($this->whenLoaded('fqas')),
             'ImagePath' => $this->whenLoaded('mediaFirst',Category::DIR),
             'created_at' => $this->created_at,
         ];
