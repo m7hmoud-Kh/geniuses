@@ -4,11 +4,13 @@ namespace App\Services\Models;
 
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
+use App\Models\Subscription;
 use App\Services\Utils\Imageable;
 use App\Services\Utils\paginatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryModel extends Model
 {
@@ -37,11 +39,12 @@ class CategoryModel extends Model
 
     public function getAllActiveCategories()
     {
-        $categories = Category::with('mediaFirst','modules','fqas','instructor')->Status()->latest()->paginate();
+        $categories = Category::with(['mediaFirst','fqas','instructor','modules' => function($q){
+            return $q->with('exams','lessons');
+        }])->Status()->latest()->get();
         return response()->json([
             'Status' => Response::HTTP_OK,
             'data' => CategoryResource::collection($categories),
-            'meta' => $this->getPaginatable($categories)
         ]);
     }
 
@@ -68,9 +71,24 @@ class CategoryModel extends Model
 
     public function showActiveCategory($categoryId)
     {
-        $category = Category::with(['mediaFirst','modules','instructor','fqas'])->findOrFail($categoryId);
+        $category =  Category::with(['mediaFirst','fqas','instructor','modules' => function($q){
+            return $q->with('exams','lessons');
+        }])->Status()->findOrFail($categoryId);
         return response()->json([
             'data' => new CategoryResource($category)
+        ]);
+    }
+
+    public function showActiveCategoriesSubscripted()
+    {
+        $subscriptionCategoryIds = Subscription::where('user_id',Auth::user()->id)
+        ->pluck('category_id');
+        $categories = Category::with(['mediaFirst','fqas','instructor','modules' => function($q){
+            return $q->with('exams','lessons');
+        }])->Status()->whereIn('id',$subscriptionCategoryIds)->get();
+        return response()->json([
+            'Status' => Response::HTTP_OK,
+            'data' => CategoryResource::collection($categories),
         ]);
     }
 

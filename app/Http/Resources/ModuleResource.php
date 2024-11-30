@@ -23,6 +23,8 @@ class ModuleResource extends JsonResource
             'status' => $this->status,
             'category' => new CategoryResource($this->whenLoaded('category')),
             'attachments' => MediaResource::collection($this->whenLoaded('attachments')),
+            'exams' => ExamResource::collection($this->whenLoaded('exams')),
+            'lessons' => LessonResource::collection($this->whenLoaded('lessons')),
             'ImagePath' => $this->whenLoaded('mediaFirst',Module::DIR),
             'created_at' => $this->created_at,
         ];

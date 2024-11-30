@@ -24,4 +24,19 @@ class Module extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function exams()
+    {
+        return $this->hasMany(Exam::class);
+    }
+
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class);
+    }
+
+    public function scopeStatus($query)
+    {
+        return $query->where('status',true);
+    }
 }
