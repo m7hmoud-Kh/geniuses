@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Dashboard\Module;
+namespace App\Http\Requests\Website\Assignment;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateModuleRequest extends FormRequest
+class StoreAssginmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +22,8 @@ class UpdateModuleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['string', Rule::unique('modules')->ignore($this->module->id)],
-            'price' => [ 'numeric', 'min:1'],
-            'allow_in_days' => [ 'numeric', 'min:1'],
-            'status' => ['boolean'],
-            'category_id' => ['exists:categories,id'],
-            'attachments.*' => ['mimes:pdf']
+            'module_id' => ['required','exists:modules,id'],
+            'attachment' => ['required','mimes:jpg,png,jpeg,pdf,mp4,mov,mp3']
         ];
     }
 }

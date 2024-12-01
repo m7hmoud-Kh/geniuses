@@ -12,11 +12,12 @@ trait Imageable {
         $this->insertImageInMeddiable($dataModel['model'], $newImage,$dataImage['image'],$dataModel['relation']);
     }
 
-    public function insertMultipleImage($imageFound, $title, $model,$dir, $relation = 'attachments')
+    public function insertMultipleImage($imageFound, $model,$dir, $relation = 'attachments')
     {
         $sort_image = 0;
         foreach ($imageFound as $image) {
-            $data =  $this->generationImageName($image, $title, $sort_image);
+            $fileOrgianlName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+            $data =  $this->generationImageName($image, $fileOrgianlName, $sort_image);
             $image->move(public_path($dir), $data['file_name']);
             $this->saveImage($model, $data, $relation);
             $sort_image++;

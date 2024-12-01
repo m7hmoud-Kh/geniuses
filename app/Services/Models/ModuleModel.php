@@ -41,11 +41,10 @@ class ModuleModel extends Model
     public function storeModule(Request $request)
     {
         $module = Module::create($request->except(['image','attachments']));
-        $this->dataImage['title'] = $request->name;
         $this->dataModel['model'] = $module;
         if($request->file('attachments')){
             $this->dataModel['relation'] = 'attachments';
-            $this->insertMultipleImage($request->attachments,$this->dataImage['title'],$this->dataModel['model'],
+            $this->insertMultipleImage($request->attachments,$this->dataModel['model'],
             Module::DIR,$this->dataModel['relation']);
         }
         return response()->json([
@@ -62,6 +61,13 @@ class ModuleModel extends Model
         ]);
     }
 
+    public function showActiveModule($moduleId)
+    {
+        $module = Module::with(['category','attachments','exams','lessons'])->Status()->findOrFail($moduleId);
+        return response()->json([
+            'data' => new ModuleResource($module)
+        ]);
+    }
     public function showActiveModulesSubscripted()
     {
         $subscriptonsModules = Subscription::where('user_id',Auth::user()->id)
@@ -74,11 +80,10 @@ class ModuleModel extends Model
 
     public function updateModule(Request $request,Module $module)
     {
-        $this->dataImage['title'] = $request->name ?? $module->name;
         $this->dataModel['model'] = $module;
         if($request->file('attachments')){
             $this->dataModel['relation'] = 'attachments';
-            $this->insertMultipleImage($request->attachments,$this->dataImage['title'],$this->dataModel['model'],Module::DIR, $this->dataModel['relation']);
+            $this->insertMultipleImage($request->attachments,$this->dataModel['model'],Module::DIR, $this->dataModel['relation']);
         }
         $module->update($request->except(['attachments']));
         return response()->json([

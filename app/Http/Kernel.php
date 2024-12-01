@@ -74,6 +74,6 @@ class Kernel extends HttpKernel
         'combine_exam_type_in_question' => CombineTypeOfExamInStoreQuestion::class,
         'combine_exam_type_in_option' =>
         CombineTypeOfExamInStoreOption::class,
-        'c' => CheckSubscription::class
+        'check.subscription' => CheckSubscription::class
     ];
 }

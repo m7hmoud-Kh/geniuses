@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Category;
+use App\Models\Module;
 use App\Models\Subscription;
 use Closure;
 use Illuminate\Http\Request;
@@ -21,6 +23,10 @@ class CheckSubscription
         $categoryId = $request->route('category_id');
         $moduleId = $request->route('module_id');
 
+        $category = Category::with('modules')->find($categoryId);
+        if (!$category || !$category->modules->contains('id', $moduleId)) {
+            return response()->json(['error' => 'Category does not have this module.'], Response::HTTP_BAD_REQUEST);
+        }
         $subscription = Subscription::where('user_id', $user->id)
         ->where('category_id', $categoryId)
         ->OrWhere('module_id', $moduleId)
@@ -31,7 +37,8 @@ class CheckSubscription
         if (!$subscription) {
             return response()->json(['message' => 'Access Denied'], 403);
         }
-        
+
         return $next($request);
+
     }
 }

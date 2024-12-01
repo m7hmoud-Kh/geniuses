@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\Website\AssignmentController;
 use App\Http\Controllers\Website\AuthController;
 use App\Http\Controllers\Website\CategoryController;
 use App\Http\Controllers\Website\ModuleController;
@@ -40,9 +41,20 @@ Route::middleware('auth:api')->group(function(){
         Route::get('/categories-subscripted','showActiveCategoriesSubscripted');
     });
 
-    Route::middleware('check.subscription')->group(function(){
-        Route::controller(ModuleController::class)->group(function(){
-            Route::get('/{category_id}/modules/{module_id}','show');
+    Route::middleware('check.subscription')
+    ->prefix('/{category_id}/modules/{module_id}')
+    ->group(function(){
+        Route::controller(ModuleController::class)
+        ->group(function(){
+            Route::get('/','show');
+        });
+
+        Route::controller(AssignmentController::class)
+        ->prefix('/attachments')
+        ->group(function(){
+            Route::post('/','store');
+            Route::get('/','index');
+            Route::delete('/{assignment_id}','destory');
         });
     });
 });
