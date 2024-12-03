@@ -39,4 +39,9 @@ class Module extends Model
     {
         return $query->where('status',true);
     }
+
+    public function subscription()
+    {
+        return $this->hasMany(Subscription::class);
+    }
 }

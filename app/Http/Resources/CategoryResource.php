@@ -27,6 +27,7 @@ class CategoryResource extends JsonResource
             'instructor' => new InstructorResource($this->whenLoaded('instructor')),
             'fqas' =>  FqaResource::collection($this->whenLoaded('fqas')),
             'ImagePath' => $this->whenLoaded('mediaFirst',Category::DIR),
+            'subscription' => SubscriptionResource::collection($this->whenLoaded('subscription')),
             'created_at' => $this->created_at,
         ];
     }
