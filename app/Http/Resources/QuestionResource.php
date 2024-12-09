@@ -23,6 +23,7 @@ class QuestionResource extends JsonResource
             'image' => new MediaResource($this->whenLoaded('mediaFirst')),
             'ImagePath' => $this->whenLoaded('mediaFirst',Question::DIR),
             'exam' => new ExamResource($this->whenLoaded('exam')),
+            'options' => OptionResource::collection($this->whenLoaded('options')),
             'created_at' => $this->created_at
         ];
     }

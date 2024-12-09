@@ -25,8 +25,7 @@ class ModuleResource extends JsonResource
             'attachments' => MediaResource::collection($this->whenLoaded('attachments')),
             'exams' => ExamResource::collection($this->whenLoaded('exams')),
             'lessons' => LessonResource::collection($this->whenLoaded('lessons')),
-            'ImagePath' => $this->whenLoaded('mediaFirst',Module::DIR),
-            'subscription' => SubscriptionResource::collection($this->whenLoaded('subscription')),
+            'ImagePath' => $this->whenLoaded('attachments',Module::DIR),            'subscription' => SubscriptionResource::collection($this->whenLoaded('subscription')),
             'created_at' => $this->created_at,
         ];
     }

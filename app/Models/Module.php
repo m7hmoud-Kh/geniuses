@@ -34,12 +34,7 @@ class Module extends Model
     {
         return $this->hasMany(Lesson::class);
     }
-
-    public function scopeStatus($query)
-    {
-        return $query->where('status',true);
-    }
-
+    
     public function subscription()
     {
         return $this->hasMany(Subscription::class);

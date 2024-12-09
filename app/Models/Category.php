@@ -35,12 +35,7 @@ class Category extends Model
     {
         return $this->hasMany(Module::class);
     }
-
-    public function scopeStatus($query)
-    {
-        return $query->where('status',true);
-    }
-
+    
     public function subscription()
     {
         return $this->hasMany(Subscription::class);

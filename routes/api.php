@@ -4,6 +4,7 @@ use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\Website\AssignmentController;
 use App\Http\Controllers\Website\AuthController;
 use App\Http\Controllers\Website\CategoryController;
+use App\Http\Controllers\Website\ExamController;
 use App\Http\Controllers\Website\ModuleController;
 use App\Http\Controllers\Website\ProfileController;
 use App\Http\Controllers\Website\SubscriptionController;
@@ -55,6 +56,13 @@ Route::middleware('auth:api')->group(function(){
             Route::post('/','store');
             Route::get('/','index');
             Route::delete('/{assignment_id}','destory');
+        });
+
+        Route::controller(ExamController::class)
+        ->prefix('exams')
+        ->group(function(){
+            Route::get('/{exam_id}','show');
+            Route::post('/{exam_id}', 'submitExam');
         });
     });
 });
