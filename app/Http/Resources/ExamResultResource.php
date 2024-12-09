@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ExamResource extends JsonResource
+class ExamResultResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,9 @@ class ExamResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'type' => $this->type,
-            'time_in_min' => $this->time_in_min,
-            'status' => $this->status,
-            'module' => new ModuleResource($this->whenLoaded('module')),
-            'questions' => QuestionResource::collection($this->whenLoaded('questions')),
+            'user_id' => $this->user_id,
+            'exam_id' => $this->exam_id,
+            'total_score' => $this->total_score,
             'created_at' => $this->created_at
         ];
     }
