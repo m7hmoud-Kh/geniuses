@@ -51,7 +51,7 @@ class ExamModel extends Model
     public function previewExam($moduleId, $examId)
     {
         $exam = Exam::Status()->where('module_id', $moduleId)->with(['questions' => function($q){
-            return $q->with('options');
+            return $q->with('options','mediaFirst');
         }])->findOrFail($examId);
 
         return response()->json([
@@ -71,7 +71,7 @@ class ExamModel extends Model
             $selectedOptionIds = array_map('intval', $selectedOptionIds);
             $correctOptionIds = $question->options->where('is_correct', 1)->pluck('id')->toArray();
 
-            if (empty(array_diff($selectedOptionIds, $correctOptionIds))) {
+            if (empty(array_diff($selectedOptionIds, $correctOptionIds)) && !empty($selectedOptionIds)) {
                 $totalScore += $question->point;
             }
 

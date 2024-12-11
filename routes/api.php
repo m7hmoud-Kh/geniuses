@@ -5,6 +5,7 @@ use App\Http\Controllers\Website\AssignmentController;
 use App\Http\Controllers\Website\AuthController;
 use App\Http\Controllers\Website\CategoryController;
 use App\Http\Controllers\Website\ExamController;
+use App\Http\Controllers\Website\LessonController;
 use App\Http\Controllers\Website\ModuleController;
 use App\Http\Controllers\Website\ProfileController;
 use App\Http\Controllers\Website\SubscriptionController;
@@ -64,6 +65,11 @@ Route::middleware('auth:api')->group(function(){
             Route::get('/{exam_id}','show');
             Route::post('/{exam_id}', 'submitExam');
         });
+
+        Route::controller(LessonController::class)->prefix('lessons')->group(function(){
+            Route::get('/{lesson_id}','show');
+        });
+
     });
 });
 

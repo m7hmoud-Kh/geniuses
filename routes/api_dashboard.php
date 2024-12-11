@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\AssignmentController;
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\ExamController;
@@ -54,4 +55,6 @@ Route::middleware('auth:admin')->group(function(){
     });
 
     Route::delete('/modules/{attachmentId}/attachment',[ModuleController::class,'destroyAttachmentById']);
+
+    Route::get('/modules/assignments/{module_id}',[AssignmentController::class,'index']);
 });

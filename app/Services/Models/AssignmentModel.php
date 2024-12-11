@@ -35,6 +35,18 @@ class AssignmentModel extends Model
 
     }
 
+    public function showAllAssginmentInModule(Request $request)
+    {
+        $assginments = Assignment::with('user')
+        ->where('module_id', $request->module_id)
+        ->get();
+
+        return response()->json([
+            'status' => Response::HTTP_CREATED,
+            'data' => AssignmentResource::collection($assginments)
+        ],Response::HTTP_CREATED);
+    }
+
 
     public function store(Request $request)
     {

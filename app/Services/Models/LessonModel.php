@@ -40,6 +40,15 @@ class LessonModel extends Model
         ]);
     }
 
+    public function showActiveLesson(Request $request)
+    {
+        $lesson = Lesson::Status()->where('module_id', $request->module_id)->findOrFail($request->lesson_id);
+        
+        return response()->json([
+            'data' => new LessonResource($lesson)
+        ]);
+    }
+
     public function updateLesson(Request $request, Lesson $lesson)
     {
         $lesson->update($request->validated());
