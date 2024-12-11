@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Assignment;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,6 +19,8 @@ class AssignmentResource extends JsonResource
             'id' => $this->id,
             'module_id' => $this->module_id,
             'attachment' => new MediaResource($this->mediaFirst),
+            'ImagePath' => Assignment::DIR,
+            'user' => new UserResource($this->whenLoaded('user')),
             'created_at' => $this->created_at,
         ];
     }

@@ -18,4 +18,9 @@ class Assignment extends Model
         return $this->morphOne(Media::class,'meddiable');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
