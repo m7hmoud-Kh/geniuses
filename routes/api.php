@@ -5,8 +5,10 @@ use App\Http\Controllers\Website\AssignmentController;
 use App\Http\Controllers\Website\AuthController;
 use App\Http\Controllers\Website\CategoryController;
 use App\Http\Controllers\Website\ExamController;
+use App\Http\Controllers\Website\FeedBackController;
 use App\Http\Controllers\Website\LessonController;
 use App\Http\Controllers\Website\ModuleController;
+use App\Http\Controllers\Website\PollController;
 use App\Http\Controllers\Website\ProfileController;
 use App\Http\Controllers\Website\SubscriptionController;
 use Illuminate\Support\Facades\Route;
@@ -69,6 +71,20 @@ Route::middleware('auth:api')->group(function(){
         Route::controller(LessonController::class)->prefix('lessons')->group(function(){
             Route::get('/{lesson_id}','show');
         });
+
+        Route::controller(PollController::class)
+        ->prefix('polls')
+        ->group(function(){
+            Route::get('/','index');
+        });
+
+        Route::controller(FeedBackController::class)
+        ->prefix('feedback')
+        ->group(function(){
+            Route::post('/','store')->middleware('check.sendFeedback');
+        });
+
+
 
     });
 });
