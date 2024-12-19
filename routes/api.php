@@ -81,7 +81,7 @@ Route::middleware('auth:api')->group(function(){
         Route::controller(FeedBackController::class)
         ->prefix('feedback')
         ->group(function(){
-            Route::post('/','store')->middleware('check.sendFeedback');
+            Route::post('/','store');
         });
 
 

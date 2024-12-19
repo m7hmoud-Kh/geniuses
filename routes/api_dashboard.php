@@ -11,6 +11,7 @@ use App\Http\Controllers\Dashboard\ModuleController;
 use App\Http\Controllers\Dashboard\OptionController;
 use App\Http\Controllers\Dashboard\PollController;
 use App\Http\Controllers\Dashboard\QuestionController;
+use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\PasswordResetController;
 use Illuminate\Support\Facades\Route;
 
@@ -59,4 +60,7 @@ Route::middleware('auth:admin')->group(function(){
     Route::delete('/modules/{attachmentId}/attachment',[ModuleController::class,'destroyAttachmentById']);
 
     Route::get('/modules/assignments/{module_id}',[AssignmentController::class,'index']);
+
+    Route::get('/users', [UserController::class,'index']);
+
 });
