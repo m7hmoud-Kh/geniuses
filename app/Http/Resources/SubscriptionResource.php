@@ -19,7 +19,10 @@ class SubscriptionResource extends JsonResource
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
             'module_id' => $this->module_id,
-            'category_id' => $this->category_id
+            'category_id' => $this->category_id,
+            'user' => new UserResource($this->whenLoaded('user')),
+            'category' => new CategoryResource($this->whenLoaded('category')),
+            'module' => new ModuleResource($this->whenLoaded('module'))
         ];
     }
 }

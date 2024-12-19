@@ -12,4 +12,18 @@ class Feedback extends Model
     protected $guarded = [];
 
 
+    public function poll()
+    {
+        return $this->belongsTo(Poll::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function module()
+    {
+        return $this->belongsTo(Module::class);
+    }
 }

@@ -72,7 +72,7 @@ class ModuleModel extends Model
     {
         $subscriptonsModules = Subscription::where('user_id',Auth::user()->id)
         ->pluck('module_id');
-        $modules = Module::with(['exams','lessons'])->Status()->whereIn('id',$subscriptonsModules)->get();
+        $modules = Module::with(['exams','lessons',])->Status()->whereIn('id',$subscriptonsModules)->get();
         return response()->json([
             'data' => ModuleResource::collection($modules)
         ]);
