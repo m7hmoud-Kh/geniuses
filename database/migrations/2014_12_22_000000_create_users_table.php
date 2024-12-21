@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone_number');
             $table->enum('gender',[0,1])->comment('1 => male, 0 => female');
+            $table->foreignId('influencer_id')->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
             $table->rememberToken();
             $table->timestamps();
         });

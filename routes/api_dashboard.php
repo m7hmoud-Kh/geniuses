@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\ExamController;
 use App\Http\Controllers\Dashboard\FqaController;
+use App\Http\Controllers\Dashboard\InfluencerController;
 use App\Http\Controllers\Dashboard\InstructorController;
 use App\Http\Controllers\Dashboard\LessonController;
 use App\Http\Controllers\Dashboard\ModuleController;
@@ -36,6 +37,7 @@ Route::middleware('auth:admin')->group(function(){
     Route::apiResource('instructors', InstructorController::class);
     Route::apiResource('lessons', LessonController::class);
     Route::apiResource('polls', PollController::class);
+    Route::apiResource('influencers', InfluencerController::class);
 
     Route::controller(QuestionController::class)->prefix('/questions')->group(function(){
         Route::middleware('combine_exam_type_in_question')->group(function(){

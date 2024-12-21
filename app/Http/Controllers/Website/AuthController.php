@@ -8,6 +8,7 @@ use App\Http\Requests\Website\User\UpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Mail\VerificationUserMail;
 use App\Models\User;
+use App\Services\Models\InfluencerModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -18,20 +19,29 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function register(Request $request, InfluencerModel $influencerModel)
     {
         $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
             'name' => 'required|string|between:2,100',
             'phone_number' => ['required'],
             'password' => 'required|string|confirmed|min:6',
             'email' => ['required','email','unique:users'],
-            'gender' => ['required','boolean']
+            'gender' => ['required','boolean'],
+            'referal_token' => ['exists:influencers,referal_token']
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
-        $user = User::create($validator->validated());
+        $influencerId = $influencerModel->getInfluencerByToken($request->referal_token);
+        $user = User::create([
+            'name' => $request->name,
+            'phone_number' => $request->phone_number,
+            'password' => $request->password,
+            'email' => $request->email,
+            'gender' => $request->gender,
+            'influencer_id' => $influencerId
+        ]);
 
         $token = Str::random(60);
         $user->update(['remember_token' => $token]);
@@ -137,4 +147,6 @@ class AuthController extends Controller
             'user' => new UserResource($user)
         ]);
     }
+
+
 }

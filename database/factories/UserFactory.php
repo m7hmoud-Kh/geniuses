@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Influencer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -23,7 +24,8 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => '123456',
             'remember_token' => Str::random(10),
-            'phone_number' => fake()->phoneNumber()
+            'phone_number' => fake()->phoneNumber(),
+            'influencer_id' => Influencer::inRandomOrder()->first()->id,
         ];
     }
 
