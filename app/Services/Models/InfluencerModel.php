@@ -56,7 +56,7 @@ class InfluencerModel extends Model
 
     public function getInfluencerByToken($token)
     {
-        $influencer = Influencer::where('referal_token', $token)->first();
+        $influencer = Influencer::where('referal_token', $token)->Status()->first();
         return $influencer ? $influencer->id : null ;
     }
 
