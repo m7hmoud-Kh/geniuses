@@ -53,4 +53,9 @@ class User  extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Subscription::class);
     }
+
+    public function influencer()
+    {
+        return $this->belongsTo(Influencer::class);
+    }
 }
