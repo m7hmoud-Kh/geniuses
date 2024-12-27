@@ -16,13 +16,19 @@ class SubscriptionController extends Controller
 {
     public function createPaymentIntent(StoreSubscriptionRequest $request,StripePayment $stripePayment, SubscriptionModel $subscriptionModel)
     {
+        $paymentIntent = null;
+        $course = $subscriptionModel->checkPaidForCategoryOrModule($request);
+        if($course->price != 0.0){
+            $paymentIntent = $stripePayment->createPaymentIntent($stripePayment->getAmountInCent($request));
+        }
         $subscription = $subscriptionModel->storeSubscription($request);
-        $paymentIntent = $stripePayment->createPaymentIntent($stripePayment->getAmountInCent($request));
 
         return response()->json([
-            'clientSecret' => $paymentIntent->client_secret,
+            'clientSecret' => $paymentIntent?->client_secret,
             'amount_in_cent' => $stripePayment->getAmountInCent($request),
             'subscription' => new SubscriptionResource($subscription)
         ], Response::HTTP_CREATED);
     }
+
+
 }

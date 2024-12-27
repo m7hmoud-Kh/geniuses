@@ -63,7 +63,8 @@
 
             <p><strong>Name:</strong> {{ $emailData['invoice']->name }}</p>
             <p><strong>Email:</strong> {{ $emailData['invoice']->email }}</p>
-            <p><strong>Description:</strong> {{ $emailData['invoice']->description }}</p>
+            <p><strong>Description:</strong></p>
+            {!! $emailData['invoice']->description !!}
             <p><strong>Price:</strong> ${{ number_format($emailData['invoice']->price, 2) }}</p>
 
             <p>To complete your payment, please click the button below:</p>
