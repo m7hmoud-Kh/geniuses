@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\ExamController;
 use App\Http\Controllers\Dashboard\FqaController;
 use App\Http\Controllers\Dashboard\InfluencerController;
 use App\Http\Controllers\Dashboard\InstructorController;
+use App\Http\Controllers\Dashboard\InvoiceController;
 use App\Http\Controllers\Dashboard\LessonController;
 use App\Http\Controllers\Dashboard\ModuleController;
 use App\Http\Controllers\Dashboard\OptionController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Dashboard\PollController;
 use App\Http\Controllers\Dashboard\QuestionController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\PasswordResetController;
+use App\Http\Resources\InvoiceResource;
 use Illuminate\Support\Facades\Route;
 
 
@@ -38,7 +40,9 @@ Route::middleware('auth:admin')->group(function(){
     Route::apiResource('lessons', LessonController::class);
     Route::apiResource('polls', PollController::class);
     Route::apiResource('influencers', InfluencerController::class);
-
+    Route::apiResource('invoices', InvoiceController::class, [
+        'only' => ['index', 'store','destroy']
+    ]);
     Route::controller(QuestionController::class)->prefix('/questions')->group(function(){
         Route::middleware('combine_exam_type_in_question')->group(function(){
             Route::put('/{questionId}','update');
