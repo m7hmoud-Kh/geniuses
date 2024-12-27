@@ -33,4 +33,13 @@ class SubscriptionModel extends Model
         }
         return $allow_inDays;
     }
+
+    public function checkPaidForCategoryOrModule($request)
+    {
+        if($request->category_id){
+            return Category::find($request->category_id);
+        }else{
+            return Module::find($request->module_id);
+        }
+    }
 }

@@ -54,4 +54,5 @@ class StripePayment
         ]);
         return $session->url;
     }
+
 }
