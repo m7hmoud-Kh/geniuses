@@ -27,7 +27,7 @@ class AuthController extends Controller
             'password' => 'required|string|confirmed|min:6',
             'email' => ['required','email','unique:users'],
             'gender' => ['required','boolean'],
-            'referal_token' => ['exists:influencers,referal_token']
+            'referal_token' => ['nullable']
         ]);
 
         if ($validator->fails()) {
