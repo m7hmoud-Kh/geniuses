@@ -13,6 +13,7 @@ use App\Http\Controllers\Dashboard\ModuleController;
 use App\Http\Controllers\Dashboard\OptionController;
 use App\Http\Controllers\Dashboard\PollController;
 use App\Http\Controllers\Dashboard\QuestionController;
+use App\Http\Controllers\Dashboard\StatisticController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Resources\InvoiceResource;
@@ -68,5 +69,10 @@ Route::middleware('auth:admin')->group(function(){
     Route::get('/modules/assignments/{module_id}',[AssignmentController::class,'index']);
 
     Route::get('/users', [UserController::class,'index']);
+
+    Route::controller(StatisticController::class)->group(function(){
+        Route::get('/get-current-eraning-monthly','getCurrentEarningMonth');
+        Route::get('/get-current-eraning-yearly','getYearlyEarning');
+    });
 
 });
