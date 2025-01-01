@@ -25,7 +25,9 @@ class UpdateInfluencerRequest extends FormRequest
         return [
             'name' => ['string'],
             'email' => [Rule::unique('influencers')->ignore($this->influencer->id)],
-            'status' => ['boolean']
+            'status' => ['boolean'],
+            'percentage' => ['min:1','max:100','numeric'],
+            'phone_number' => ['string']
         ];
     }
 }

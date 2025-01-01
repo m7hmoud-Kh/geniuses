@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('referal_token')->unique();
+            $table->float('percentage');
+            $table->string('phone_number');
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

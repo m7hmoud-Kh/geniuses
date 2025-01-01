@@ -36,7 +36,7 @@ class UpdateQuestionRequest extends FormRequest
                 }
             }],
             'point' => ['numeric'],
-            'image' => ['mimes:png,jpg,jpeg'],
+            'image' => ['mimes:png,jpg,jpeg,mp4,mov'],
             'explanation' => ['max:100'],
         ];
     }

@@ -19,6 +19,8 @@ class InfluencerResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'referal_token' => $this->referal_token,
+            'phone_number' => $this->phone_number,
+            'percentage' => $this->percentage,
             'status' => $this->status,
             'users_count' => $this->users_count,
             'users' => UserResource::collection($this->whenLoaded('users')),

@@ -71,4 +71,13 @@ class AssignmentModel extends Model
         $assginment->delete();
         return response()->json([],Response::HTTP_NO_CONTENT);
     }
+
+    public function getMyAssignments()
+    {
+        $assginments = Assignment::where('user_id', Auth::user()->id)->with('module')->get();
+
+        return response()->json([
+            'assginments' => AssignmentResource::collection($assginments)
+        ]);
+    }
 }

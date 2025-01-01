@@ -26,6 +26,7 @@ class UpdateRequest extends FormRequest
             'name' => ['between:2,100'],
             'gender' => [Rule::in([0,1])],
             'phone_number' => ['string'],
+            'image' => ['mimes:png,jpg,jpeg'],
         ];
     }
 }

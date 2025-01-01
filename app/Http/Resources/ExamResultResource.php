@@ -18,6 +18,8 @@ class ExamResultResource extends JsonResource
             'id' => $this->id,
             'user_id' => $this->user_id,
             'exam_id' => $this->exam_id,
+            'exam' => new ExamResource($this->whenLoaded('exam')),
+
             'total_score' => $this->total_score,
             'created_at' => $this->created_at
         ];

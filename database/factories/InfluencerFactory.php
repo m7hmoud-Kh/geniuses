@@ -19,7 +19,9 @@ class InfluencerFactory extends Factory
         return [
             'name' => fake()->name,
             'email' => fake()->unique()->safeEmail(),
-            'referal_token' => fake()->unique()->sentence(1)
+            'referal_token' => fake()->unique()->sentence(1),
+            'percentage' => fake()->randomFloat(2,1,100),
+            'phone_number' => fake()->phoneNumber()
         ];
     }
 }

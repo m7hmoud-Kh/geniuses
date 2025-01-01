@@ -24,6 +24,8 @@ class StoreInfluencerRequest extends FormRequest
         return [
             'name' => ['required','string'],
             'email' => ['required', 'unique:influencers'],
+            'percentage' => ['required','min:1','max:100','numeric'],
+            'phone_number' => ['required','string']
         ];
     }
 }

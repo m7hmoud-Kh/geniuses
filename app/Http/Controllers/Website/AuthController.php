@@ -9,6 +9,7 @@ use App\Http\Resources\UserResource;
 use App\Mail\VerificationUserMail;
 use App\Models\User;
 use App\Services\Models\InfluencerModel;
+use App\Services\Utils\Imageable;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -19,6 +20,18 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+    use Imageable;
+
+    public $dataImage = [
+        'title' => '',
+        'image' => '',
+        'dir' => User::DIR
+    ];
+    public $dataModel = [
+        'model' => '',
+        'relation' => 'mediaFirst'
+    ];
+
     public function register(Request $request, InfluencerModel $influencerModel)
     {
         $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
@@ -104,8 +117,10 @@ class AuthController extends Controller
 
     public function userProfile()
     {
+        $user = User::with('mediaFirst')->where('id', Auth::user()->id)->first();
+
         return response()->json([
-            'User' => new UserResource(auth()->user())
+            'User' => new UserResource($user)
         ]);
     }
 
@@ -114,8 +129,14 @@ class AuthController extends Controller
 
     public function update(UpdateRequest $request)
     {
-        $user = User::whereId(auth()->user()->id)->first();
-        $user->update($request->validated());
+        $user = User::whereId(auth()->user()->id)->with('mediaFirst')->first();
+        $user->update($request->except('image'));
+        if($request->file('image')){
+            $this->dataImage['title'] =  $user->id;
+            $this->dataImage['image'] = $request->image;
+            $this->dataModel['model'] = $user;
+            $this->handleImageNameAndInsertInDb($this->dataImage, $this->dataModel);
+        }
         return response()->json([
             'message' => 'User Updated Data Successfully..',
             'status' => Response::HTTP_ACCEPTED
@@ -139,7 +160,7 @@ class AuthController extends Controller
 
     protected function createNewToken($token)
     {
-        $user = User::where('id', Auth::user()->id)->first();
+        $user = User::with('mediaFirst')->where('id', Auth::user()->id)->first();
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
