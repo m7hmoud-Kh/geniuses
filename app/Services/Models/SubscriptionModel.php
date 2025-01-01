@@ -42,4 +42,16 @@ class SubscriptionModel extends Model
             return Module::find($request->module_id);
         }
     }
+
+    public function subscribeByAdmin(Request $request)
+    {
+        $allow_inDays = $this->getallowInDays($request);
+        return Subscription::create([
+            'start_date' => now(),
+            'end_date' => now()->addDays($allow_inDays),
+            'user_id' => $request->user_id,
+            'module_id' => $request->module_id ?? null,
+            'category_id' => $request->category_id ?? null
+        ]);
+    }
 }

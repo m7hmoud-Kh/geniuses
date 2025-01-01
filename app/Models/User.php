@@ -18,6 +18,10 @@ class User  extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable, Getterable;
 
+    public const DIR = '/assets/Users';
+    public const DISK_NAME = 'user';
+
+
     protected $guarded = [];
     protected $hidden = [
         'password'
@@ -58,4 +62,10 @@ class User  extends Authenticatable implements JWTSubject
     {
         return $this->belongsTo(Influencer::class);
     }
+
+    public function mediaFirst()
+    {
+        return $this->morphOne(Media::class,'meddiable');
+    }
+
 }

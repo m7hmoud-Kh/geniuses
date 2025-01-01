@@ -21,6 +21,7 @@ class AssignmentResource extends JsonResource
             'attachment' => new MediaResource($this->mediaFirst),
             'ImagePath' => Assignment::DIR,
             'user' => new UserResource($this->whenLoaded('user')),
+            'module' => new ModuleResource($this->whenLoaded('module')),
             'created_at' => $this->created_at,
         ];
     }

@@ -55,6 +55,10 @@ return [
             'driver' => 'local',
             'root' => public_path() . '/assets/Questions/',
         ],
+        'user' => [
+            'driver' => 'local',
+            'root' => public_path() . '/assets/Users/',
+        ],
         'assignment' => [
             'driver' => 'local',
             'root' => public_path() . '/assets/Assignments/',

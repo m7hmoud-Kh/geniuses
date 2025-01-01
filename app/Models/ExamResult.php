@@ -11,5 +11,8 @@ class ExamResult extends Model
     use HasFactory, Getterable;
     protected $guarded = [];
 
-
+    public function exam()
+    {
+        return $this->belongsTo(Exam::class);
+    }
 }

@@ -43,6 +43,8 @@ Route::middleware('auth:api')->group(function(){
     Route::controller(ProfileController::class)->prefix('profile')->group(function(){
         Route::get('/modules-subscripted','showActiveModulesSubscripted');
         Route::get('/categories-subscripted','showActiveCategoriesSubscripted');
+        Route::get('/assignments','getAllAssignments');
+        Route::get('/exam-results','getAllExamResult');
     });
 
     Route::middleware('check.subscription')

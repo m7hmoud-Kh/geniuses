@@ -165,5 +165,12 @@ class ExamModel extends Model
         return response()->json([],Response::HTTP_NO_CONTENT);
     }
 
+    public function getAllExamResult()
+    {
+        $results = ExamResult::where('user_id',Auth::user()->id)->with('exam')->get();
+        return response()->json([
+            'results' => ExamResultResource::collection($results),
+        ]);
+    }
 
 }
