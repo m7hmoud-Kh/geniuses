@@ -148,4 +148,13 @@ class CategoryModel extends Model
         $category->delete();
         return response()->json([],Response::HTTP_NO_CONTENT);
     }
+
+    public function getAllCategoriesInSelections()
+    {
+        $categories = Category::Status()->get(['id','name']);
+        return response()->json([
+            'status' => Response::HTTP_OK,
+            'data' => $categories
+        ]);
+    }
 }

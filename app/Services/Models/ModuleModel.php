@@ -109,4 +109,14 @@ class ModuleModel extends Model
         // $media->delete();
         return response()->json([],Response::HTTP_NO_CONTENT);
     }
+
+    public function getAllModulesInSelections()
+    {
+        $modules = Module::Status()->get(['id','name']);
+        return response()->json([
+            'status' => Response::HTTP_OK,
+            'data' => $modules
+        ]);
+    }
 }
+

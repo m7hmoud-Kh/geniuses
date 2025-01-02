@@ -28,4 +28,14 @@ class UserModel extends Model
         ]);
 
     }
+
+    public function getAllUsersInSelections()
+    {
+        $users = User::whereNotNull('email_verified_at')->get(['id','email']);
+        return response()->json([
+            'Status' => Response::HTTP_OK,
+            'data' => $users
+        ]);
+
+    }
 }

@@ -64,4 +64,9 @@ class ModuleController extends Controller
     {
         return $this->moduelModel->destroyAttachment($attachmentId);
     }
+
+    public function getAllModulesInSelections()
+    {
+        return $this->moduelModel->getAllModulesInSelections();
+    }
 }

@@ -35,7 +35,9 @@ Route::post('/reset-password',[PasswordResetController::class,'resetPassword']);
 
 Route::middleware('auth:admin')->group(function(){
     Route::apiResource('categories', CategoryController::class);
+    Route::get('/categories-selections', [CategoryController::class,'getAllCategoriesInSelections']);
     Route::apiResource('modules', ModuleController::class);
+    Route::get('/modules-selections',[ModuleController::class,'getAllModulesInSelections']);
     Route::apiResource('fqas', FqaController::class);
     Route::apiResource('exams', ExamController::class);
     Route::apiResource('instructors', InstructorController::class);
@@ -70,6 +72,7 @@ Route::middleware('auth:admin')->group(function(){
     Route::get('/modules/assignments/{module_id}',[AssignmentController::class,'index']);
 
     Route::get('/users', [UserController::class,'index']);
+    Route::get('/users-selections', [UserController::class, 'getAllUsersInSelections']);
 
     Route::controller(StatisticController::class)->group(function(){
         Route::get('/get-current-eraning-monthly','getCurrentEarningMonth');
