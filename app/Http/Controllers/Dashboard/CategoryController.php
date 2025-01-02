@@ -57,4 +57,9 @@ class CategoryController extends Controller
     {
         return $this->categoryModel->destoryCategory($category);
     }
+
+    public function getAllCategoriesInSelections()
+    {
+        return $this->categoryModel->getAllCategoriesInSelections();
+    }
 }

@@ -21,4 +21,9 @@ class UserController extends Controller
     {
         return $this->userModel->getAllUser();
     }
+
+    public function getAllUsersInSelections()
+    {
+        return $this->userModel->getAllUsersInSelections();
+    }
 }
