@@ -24,15 +24,15 @@ class UpdateQuestionRequest extends FormRequest
         return [
             'exam_id' => ['exists:exams,id'],
             'question' => [function ($attribute, $value, $fail) {
-                if ($this->type == 'table') {
+                if ($this->type == 'table'|| $this->type == 'flash') {
                     // Ensure the question is either a JSON string or a valid array.
                     if (!is_array($value) && is_null(json_decode($value, true))) {
                         $fail('The question must be a valid JSON or array when type is table.');
                     }
                 }
 
-                if (in_array($this->type, ['flash', 'mcq']) && !is_string($value)) {
-                    $fail('The question must be a string when type is flash or mcq.');
+                if (in_array($this->type, ['mcq']) && !is_string($value)) {
+                    $fail('The question must be a string when type is mcq.');
                 }
             }],
             'point' => ['numeric'],

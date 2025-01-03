@@ -33,7 +33,7 @@ class StoreQuestionRequest extends FormRequest
                 }
 
                 if (in_array($this->type, ['mcq']) && !is_string($value)) {
-                    $fail('The question must be a string when type is flash or mcq.');
+                    $fail('The question must be a string when type is mcq.');
                 }
             }],
             'point' => ['required', 'numeric'],

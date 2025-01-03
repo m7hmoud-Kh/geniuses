@@ -130,13 +130,14 @@ class AuthController extends Controller
     public function update(UpdateRequest $request)
     {
         $user = User::whereId(auth()->user()->id)->with('mediaFirst')->first();
-        $user->update($request->except('image'));
         if($request->file('image')){
             $this->dataImage['title'] =  $user->id;
             $this->dataImage['image'] = $request->image;
             $this->dataModel['model'] = $user;
+            $this->deleteImage(User::DISK_NAME,$user->mediaFirst, $this->dataModel);
             $this->handleImageNameAndInsertInDb($this->dataImage, $this->dataModel);
         }
+        $user->update($request->except('image'));
         return response()->json([
             'message' => 'User Updated Data Successfully..',
             'status' => Response::HTTP_ACCEPTED
