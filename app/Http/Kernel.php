@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\CheckIfSendFeedbackToModule;
 use App\Http\Middleware\CheckSubscription;
+use App\Http\Middleware\checkTokenValid;
 use App\Http\Middleware\CombineTypeOfExamInStoreOption;
 use App\Http\Middleware\CombineTypeOfExamInStoreQuestion;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -76,6 +77,9 @@ class Kernel extends HttpKernel
         'combine_exam_type_in_option' =>
         CombineTypeOfExamInStoreOption::class,
         'check.subscription' => CheckSubscription::class,
-        'check.sendFeedback' => CheckIfSendFeedbackToModule::class
+        'check.sendFeedback' => CheckIfSendFeedbackToModule::class,
+
+        //check valid token
+        'check.token.valid' => checkTokenValid::class,
     ];
 }

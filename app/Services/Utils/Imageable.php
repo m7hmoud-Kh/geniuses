@@ -89,6 +89,12 @@ trait Imageable {
             case 'pdf':
                 return 'document';
                 break;
+            case 'mp4':
+                return 'video';
+                break;
+            case 'mov':
+                return 'video';
+                break;
             default:
                 return 'image';
                 break;
