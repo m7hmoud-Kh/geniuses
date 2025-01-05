@@ -30,7 +30,7 @@ Route::post('/reset-password',[PasswordResetController::class,'resetPassword']);
 
 Route::controller(CategoryController::class)->prefix('/categories')->group(function(){
     Route::get('/','getAllActiveCategories');
-    Route::get('/{categoryId}','showCategoryById');
+    Route::get('/{categoryId}','showCategoryById')->middleware('check.token.valid');
 });
 
 

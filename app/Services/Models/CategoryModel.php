@@ -113,7 +113,8 @@ class CategoryModel extends Model
 
     public function showActiveCategoriesSubscripted()
     {
-        $subscriptionCategoryIds = Subscription::where('user_id',Auth::user()->id)        ->where('start_date', '<=', now())
+        $subscriptionCategoryIds = Subscription::where('user_id',Auth::user()->id)
+        ->where('start_date', '<=', now())
         ->where('end_date', '>=', now())
         ->pluck('category_id');
         $categories = Category::with(['mediaFirst','fqas','instructor','modules' => function($q){
