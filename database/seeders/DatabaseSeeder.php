@@ -34,5 +34,9 @@ class DatabaseSeeder extends Seeder
         Lesson::factory()->count(20)->create();
         Subscription::factory()->count(5)->forCategory()->create();
         Subscription::factory()->count(5)->forModule()->create();
+
+        $this->call([
+            SettingSeeder::class
+        ]);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\Website\AssignmentController;
 use App\Http\Controllers\Website\AuthController;
@@ -85,12 +86,12 @@ Route::middleware('auth:api')->group(function(){
         ->group(function(){
             Route::post('/','store');
         });
-
-
-
     });
 });
 
+Route::controller(SettingController::class)->prefix('/settings')->group(function(){
+    Route::get('/','index');
+});
 
 
 

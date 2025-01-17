@@ -13,6 +13,7 @@ use App\Http\Controllers\Dashboard\ModuleController;
 use App\Http\Controllers\Dashboard\OptionController;
 use App\Http\Controllers\Dashboard\PollController;
 use App\Http\Controllers\Dashboard\QuestionController;
+use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\StatisticController;
 use App\Http\Controllers\Dashboard\SubscriptionController;
 use App\Http\Controllers\Dashboard\UserController;
@@ -81,5 +82,11 @@ Route::middleware('auth:admin')->group(function(){
 
     Route::controller(SubscriptionController::class)->group(function(){
         Route::post('/subscriptions','store');
+    });
+
+    Route::controller(SettingController::class)->prefix('/settings')->group(function(){
+        Route::get('/','index');
+        Route::get('/{id}','show');
+        Route::post('/{id}','update');
     });
 });
