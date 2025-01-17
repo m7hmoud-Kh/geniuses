@@ -5,14 +5,14 @@ namespace App\Services\Models;
 use App\Http\Resources\QuestionResource;
 use App\Models\Question;
 use App\Services\Utils\Imageable;
-use App\Services\Utils\paginatable;
+use App\Services\Utils\Paginatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class QuestionModel extends Model
 {
-    use paginatable, Imageable;
+    use Paginatable, Imageable;
 
     public $dataImage = [
         'title' => '',

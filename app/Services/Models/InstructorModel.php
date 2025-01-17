@@ -4,7 +4,7 @@ namespace App\Services\Models;
 
 use App\Http\Resources\InstructorResource;
 use App\Models\Instructor;
-use App\Services\Utils\paginatable;
+use App\Services\Utils\Paginatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -12,7 +12,7 @@ use Illuminate\Http\Response;
 class InstructorModel extends Model
 {
 
-    use paginatable;
+    use Paginatable;
 
     public function getAllInstructor()
     {

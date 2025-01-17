@@ -2,7 +2,7 @@
 
 namespace App\Services\Utils;
 
-trait paginatable
+trait Paginatable
 {
     public static function getPaginatable($collection)
     {

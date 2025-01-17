@@ -11,7 +11,7 @@ use App\Http\Resources\ExamResultResource;
 use App\Models\Exam;
 use App\Models\ExamResult;
 use App\Models\Question;
-use App\Services\Utils\paginatable;
+use App\Services\Utils\Paginatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ExamModel extends Model
 {
-    use paginatable;
+    use Paginatable;
 
     public function getAllExams($moduleId)
     {

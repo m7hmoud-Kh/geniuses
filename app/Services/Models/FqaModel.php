@@ -4,14 +4,14 @@ namespace App\Services\Models;
 
 use App\Http\Resources\FqaResource;
 use App\Models\Fqa;
-use App\Services\Utils\paginatable;
+use App\Services\Utils\Paginatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class FqaModel extends Model
 {
-    use paginatable;
+    use Paginatable;
 
     public function getAllFqa($categoryId)
     {

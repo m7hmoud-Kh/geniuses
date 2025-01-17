@@ -4,7 +4,7 @@ namespace App\Services\Models;
 
 use App\Http\Resources\InvoiceResource;
 use App\Models\Invoice;
-use App\Services\Utils\paginatable;
+use App\Services\Utils\Paginatable;
 use App\Services\Utils\StripePayment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -13,7 +13,7 @@ use Illuminate\Http\Response;
 class InvoiceModel extends Model
 {
 
-    use paginatable;
+    use Paginatable;
 
     public function getAllIvoices()
     {

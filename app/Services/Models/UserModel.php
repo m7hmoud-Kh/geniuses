@@ -3,14 +3,14 @@
 namespace App\Services\Models;
 
 use App\Models\User;
-use App\Services\Utils\paginatable;
+use App\Services\Utils\Paginatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Response;
 use App\Http\Resources\UserResource;
 
 class UserModel extends Model
 {
-    use paginatable;
+    use Paginatable;
 
 
     public function getAllUser()

@@ -6,7 +6,7 @@ use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use App\Models\Subscription;
 use App\Services\Utils\Imageable;
-use App\Services\Utils\paginatable;
+use App\Services\Utils\Paginatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

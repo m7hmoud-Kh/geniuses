@@ -4,14 +4,14 @@ namespace App\Services\Models;
 
 use App\Http\Resources\PollResource;
 use App\Models\Poll;
-use App\Services\Utils\paginatable;
+use App\Services\Utils\Paginatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class PollModel extends Model
 {
-    use paginatable;
+    use Paginatable;
 
     public function getAllPoll()
     {

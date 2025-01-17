@@ -4,14 +4,14 @@ namespace App\Services\Models;
 
 use App\Http\Resources\LessonResource;
 use App\Models\Lesson;
-use App\Services\Utils\paginatable;
+use App\Services\Utils\Paginatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class LessonModel extends Model
 {
-    use paginatable;
+    use Paginatable;
 
     public function getAllLessons($moduleId)
     {
@@ -43,7 +43,7 @@ class LessonModel extends Model
     public function showActiveLesson(Request $request)
     {
         $lesson = Lesson::Status()->where('module_id', $request->module_id)->findOrFail($request->lesson_id);
-        
+
         return response()->json([
             'data' => new LessonResource($lesson)
         ]);

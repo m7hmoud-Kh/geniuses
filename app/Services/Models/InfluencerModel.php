@@ -3,15 +3,14 @@ namespace App\Services\Models;
 
 use App\Http\Resources\InfluencerResource;
 use App\Models\Influencer;
-use App\Services\Utils\paginatable;
+use App\Services\Utils\Paginatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class InfluencerModel extends Model
 {
-    use paginatable;
-
+    use Paginatable;
     public function getAllInfluencer()
     {
 
