@@ -41,11 +41,16 @@ trait Imageable {
         }
     }
 
-    private function insertImage($title, $image, $dir)
+    public function insertImage($title, $image, $dir)
     {
         $newImage  = $title . '_' . date('Y-m-d-H-i-s') . '.' . $image->getClientOriginalExtension();
         $image->move(public_path($dir), $newImage);
         return $newImage;
+    }
+
+    public function deleteImageFromLocalStorage($diskName, $image)
+    {
+        Storage::disk($diskName)->delete($image);
     }
 
     private function insertImageInMeddiable($model, $newImage,
