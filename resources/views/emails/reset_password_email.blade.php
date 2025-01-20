@@ -52,7 +52,7 @@
             <p>Hello,  {{$emailData['email']}}</p>
             <p>We received a request to reset your password. Please click the link below to reset your password:</p>
             @if ($emailData['isAdmin'])
-            <a href="{{config('app.frontAppUrl')}}/dashbaord/auth/reset-password?token={{$emailData['token']}}"
+            <a href="{{config('app.frontAppUrl')}}/dashboard/auth/reset-password?token={{$emailData['token']}}"
             style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #fff; text-decoration: none;">
             Reset Password
             </a>
